@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center"
+        android:text="Battery Dashboard" />
+    <Button
+        android:id="@+id/voltButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Battery 1 More Info"/>
+
+    <TextView
+        android:id="@+id/volt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:text="Battery 1 Voltage:" />
+
+    <ImageView
+        android:id="@+id/temp1image"
+        android:layout_width="59dp"
+        android:layout_height="36dp"
+        android:src="@drawable/good"
+        android:layout_gravity="right"
+        />
+
+</LinearLayout>
