@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_critical_value_dash){
             fragmentManager.beginTransaction().replace( R.id.content_frame, new CriticalValueFragment() ).commit();
         }
-        if (id == R.id.nav_speedometer_dash) {
+        else if (id == R.id.nav_speedometer_dash) {
             fragmentManager.beginTransaction().replace( R.id.content_frame, new SpeedometerFragment() ).commit();
         }
         else if (id == R.id.nav_temperature_dash) {
