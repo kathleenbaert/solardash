@@ -34,35 +34,7 @@ public class VoltageFragment extends Fragment {
 
         final Button voltButton1 = myView.findViewById( R.id.voltButton1);
 
-        voltButton1.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                // set title
-                alertDialogBuilder.setTitle("Solar Array 1 Amps Recent Activity");
-
-                double [] ampsArray = d.dataInstance.getAmpsArray();
-                String message = "";
-                for (int i = 0; i < ampsArray.length; i++) {
-                    message += ("\n" + ampsArray[i]);
-                }
-
-
-                alertDialogBuilder.setMessage(message);
-
-
-
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-            }
-        });
         return myView;
     }
 }

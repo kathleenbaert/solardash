@@ -34,26 +34,6 @@ public class BatteryFragment extends Fragment {
 
         final Button voltButton1 = myView.findViewById( R.id.voltButton1);
 
-        voltButton1.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                // set title
-                alertDialogBuilder.setTitle("Battery 1 Voltage Recent Activity");
-
-                double [] voltageArray = d.dataInstance.getVoltageArray();
-                String message = "";
-                for (int i = 0; i < voltageArray.length; i++) {
-                    message += ("\n" + voltageArray[i]);
-                }
-                alertDialogBuilder.setMessage(message);
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
-        });
         return myView;
     }
 }

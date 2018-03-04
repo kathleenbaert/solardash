@@ -120,27 +120,20 @@ public class ConnectThread extends Thread {
                             Iterator<String> keys = jsonObj.keys();
                             String key = keys.next().toString();
 
-                            if (key.equals("current_sensor")) {
-                                JSONObject currObj = (JSONObject) jsonObj.get( "current_sensor" );
-                                insertData.dataInstance.setAmps( (Double) currObj.get( "amps" ) );
-                                insertData.dataInstance.addToAmpArray(Double.parseDouble( String.valueOf( currObj.get("amps" ) ) ));
+                            if (key.equals("speed")) {
+                                JSONObject currObj = (JSONObject) jsonObj.get( "speed" );
                             }
-                            else if(key.equals( "voltage_sensor" )){
-                                JSONObject voltObj = (JSONObject) jsonObj.get( "voltage_sensor" );
-                                insertData.dataInstance.setVoltage( (Double) voltObj.get( "voltage" ));
-                                insertData.dataInstance.addToVoltArray(Double.parseDouble( String.valueOf( voltObj.get("voltage" ) ) ));
-
+                            else if(key.equals( "temperature" )){
+                                JSONObject currObj = (JSONObject) jsonObj.get( "temperature" );
                             }
-                            else if(key.equals( "temperature_sensor" )){
-                                JSONObject tempObj = (JSONObject) jsonObj.get( "temperature_sensor" );
-                                insertData.dataInstance.setTempC(Double.parseDouble( String.valueOf( tempObj.get("degreesC" ) ) ));
-                                insertData.dataInstance.setTempF(Double.parseDouble( String.valueOf( tempObj.get("degreesF" ) ) ));
-                                insertData.dataInstance.addToTempFArray(Double.parseDouble( String.valueOf( tempObj.get("degreesF" ) ) ));
-                                insertData.dataInstance.addToTempCArray(Double.parseDouble( String.valueOf( tempObj.get("degreesC" ) ) ));
-
+                            else if(key.equals( "battery" )) {
+                                JSONObject currObj = (JSONObject) jsonObj.get( "battery" );
                             }
+                            else if(key.equals( "voltage" )){
+                            JSONObject currObj = (JSONObject) jsonObj.get( "voltage" );
+                            }
+                            //Add an else case
                         }
-
                         data = new String(Arrays.copyOfRange(mmBuffer, count + 1, numBytes), "UTF-8");
                         newPacket = true;
                     }
