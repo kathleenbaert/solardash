@@ -22,11 +22,7 @@ import android.widget.TextView;
 public class CriticalValueFragment extends Fragment {
     private final String TAG = "CriticalValueFragment";
     View myView;
-    String speedWarning, speedCritical;
-    String tempWarning, tempCritical;
-    String batteryWarning, batteryCritical;
-    String voltageWarning, voltageCritical;
-
+    CriticalValues cv = new CriticalValues();
 
     private DrawerLayout drawerLayout;
 
@@ -35,11 +31,9 @@ public class CriticalValueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate( R.layout.critical_values_dash, container, false );
         textViews();
-
         return myView;
+
     }
-
-
 
     private void textViews() {
         Button saveButton = (Button) myView.findViewById( R.id.save_button );
@@ -50,8 +44,26 @@ public class CriticalValueFragment extends Fragment {
 
     private Button.OnClickListener get_edit_view_button_listener = new Button.OnClickListener() {
         public void onClick(View v) {
-            speedWarning = myView.findViewById( R.id.speed_warning ).toString();
-            Log.d(TAG, "Speed warning: " + speedWarning );
+            EditText editText = myView.findViewById( R.id.speed_warning );
+            cv.setSpeedWarning(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.speed_critical );
+            cv.setSpeedCritical(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.temp_warning );
+            cv.setTempWarning(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.temp_critical );
+            cv.setTempCritical(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.battery_warning );
+            cv.setBatteryWarning(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.battery_critical );
+            cv.setBatteryCritical(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.voltage_warning );
+            cv.setVoltageWarning(Integer.parseInt(editText.getText().toString()));
+            editText = myView.findViewById( R.id.voltage_critical );
+            cv.setVoltageCritical(Integer.parseInt(editText.getText().toString()));
+
+            //works!
+            //System.out.println(cv.toString());
+
             Snackbar snackbar = Snackbar.make( myView, "Saved numbers", Snackbar.LENGTH_SHORT );
             snackbar.show();
         }
