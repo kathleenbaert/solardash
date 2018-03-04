@@ -43,7 +43,7 @@ public class CustomListAdapter extends ArrayAdapter {
 
         //this code gets references to objects in the listview_row.xml file
         TextView nameTextField = (TextView) rowView.findViewById(R.id.textView1);
-        TextView infoTextField = (TextView) rowView.findViewById(R.id.textView1);
+        TextView infoTextField = (TextView) rowView.findViewById(R.id.textView2);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.imageView);
 
         //this code sets the values of the objects to values from the arrays
