@@ -1,5 +1,6 @@
 package com.example.kathleenbaert.myapplication;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -24,16 +26,36 @@ public class BatteryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.battery_dash, container, false);
-
-        final Context context = myView.getContext();
-
-        final JSONData d = new JSONData();
-
-        TextView firstVolt = myView.findViewById(R.id.volt1);
-        firstVolt.setText("Battery 1 Voltage: " + Double.toString( d.dataInstance.getVoltage() ) );
-
-        final Button voltButton1 = myView.findViewById( R.id.voltButton1);
-
         return myView;
+    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated( savedInstanceState );
+
+        String[] nameArray = {"BTest1", "BTest2", "BTest3", "BTest4", "BTest5", "BTest6"};
+
+        String[] infoArray = {
+                "Btest sentence 1",
+                "Btest sentence 2",
+                "Btest sentence 3",
+                "Btest sentence 4",
+                "Btest sentence 5",
+                "Btest sentence 6."
+        };
+
+        Integer[] imageArray = {R.drawable.good,
+                R.drawable.good,
+                R.drawable.good,
+                R.drawable.warning,
+                R.drawable.good,
+                R.drawable.critical};
+
+        ListView listView;
+
+        Context context = myView.getContext();
+        CustomListAdapter customListAdapter = new CustomListAdapter( (Activity) context, nameArray, infoArray, imageArray );
+        listView = (ListView) myView.findViewById( R.id.listView );
+        listView.setAdapter( customListAdapter );
+
     }
 }

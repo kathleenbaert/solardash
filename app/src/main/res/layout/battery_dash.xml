@@ -1,46 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearlayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+              android:id="@+id/linearlayout"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
         android:layout_marginTop="60dp"
-        android:layout_gravity="center"
-        android:text="Battery Dashboard" />
-    <Button
-        android:id="@+id/voltButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Battery 1 More Info"/>
+        android:text="Battery Readings"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/volt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="left"
-        android:layout_marginLeft="20dp"
-        android:text="Battery 1 Voltage:" />
-
-    <ImageView
-        android:id="@+id/temp1image"
-        android:layout_width="59dp"
-        android:layout_height="36dp"
-        android:src="@drawable/good"
-        android:layout_gravity="right"
-        />
+    </ListView>
 
 </LinearLayout>
