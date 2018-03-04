@@ -28,22 +28,22 @@ public class TemperatureFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated( savedInstanceState );
 
-        String[] nameArray = {"Octopus", "Pig", "Sheep", "Rabbit", "Snake", "Spider"};
+        String[] nameArray = {"Test1", "Test2", "Test3", "Test4", "Test5", "Test6"};
 
         String[] infoArray = {
-                "8 tentacled monster",
-                "Delicious in rolls",
-                "Great for jumpers",
-                "Nice in a stew",
-                "Great for shoes",
-                "Scary."
+                "test sentence 1",
+                "test sentence 2",
+                "test sentence 3",
+                "test sentence 4",
+                "test sentence 5",
+                "test sentence 6."
         };
 
         Integer[] imageArray = {R.drawable.good,
-                R.drawable.warning,
-                R.drawable.critical,
+                R.drawable.good,
                 R.drawable.good,
                 R.drawable.warning,
+                R.drawable.good,
                 R.drawable.critical};
 
         ListView listView;
