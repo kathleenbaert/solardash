@@ -25,7 +25,15 @@ public class BatteryFragment extends Fragment {
 
     View myView;
     Handler mHandler;
-    int b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+    static CriticalValues cv = new CriticalValues();
+    int b1 = 0;
+    int b2 = 0;
+    int b3 = 0;
+    int b4 = 0;
+    int b5 = 0;
+    int b6 = 0;
+    static int warning;
+    static int critical;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -83,6 +91,14 @@ public class BatteryFragment extends Fragment {
         }
 
     };
+
+    public static void generateImages(){
+        warning = cv.getBatteryWarning();
+        critical = cv.getBatteryCritical();
+
+
+
+    }
 
 
 }
