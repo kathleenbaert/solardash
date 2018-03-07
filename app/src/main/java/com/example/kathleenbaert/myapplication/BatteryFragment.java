@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 /**
  * Created by kathleenbaert on 11/1/17.
  */
@@ -26,18 +28,18 @@ public class BatteryFragment extends Fragment {
     View myView;
     Handler mHandler;
     static CriticalValues cv = new CriticalValues();
-    int b1 = 0;
-    int b2 = 0;
-    int b3 = 0;
-    int b4 = 0;
-    int b5 = 0;
-    int b6 = 0;
+    int [] b = new int [6];
+    Random random = new Random();
     static int warning;
     static int critical;
+    Integer[] imageArray = new Integer[6];
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.battery_dash, container, false);
+        for(int i = 0; i < b.length; i++){
+            b[i] = 100;
+        }
         return myView;
     }
     @Override
@@ -57,30 +59,24 @@ public class BatteryFragment extends Fragment {
         public void run()
 
         {
-            b1++;
-            b2++;
-            b3++;
-            b4++;
-            b5++;
-            b6++;
+
+            for(int i = 0; i < b.length; i++){
+                b[i]-=random.nextInt( 10 );
+
+            }
             BatteryFragment.this.mHandler.postDelayed(m_Runnable,1000);
             String[] nameArray = {"Rear Right", "Rear Middle", "Rear Left", "Front Right", "Front Middle", "Front Left"};
 
             String[] infoArray = {
-                    "Current Battery percentage: " + b1,
-                    "Current Battery percentage: " + b2,
-                    "Current Battery percentage: " + b3,
-                    "Current Battery percentage: " + b4,
-                    "Current Battery percentage: " + b5,
-                    "Current Battery percentage: " + b6
+                    "Current Battery percentage: " + b[0],
+                    "Current Battery percentage: " + b[1],
+                    "Current Battery percentage: " + b[2],
+                    "Current Battery percentage: " + b[3],
+                    "Current Battery percentage: " + b[4],
+                    "Current Battery percentage: " + b[5]
             };
 
-            Integer[] imageArray = {R.drawable.good,
-                    R.drawable.good,
-                    R.drawable.good,
-                    R.drawable.warning,
-                    R.drawable.good,
-                    R.drawable.critical};
+
 
             ListView listView;
 
@@ -88,15 +84,26 @@ public class BatteryFragment extends Fragment {
             CustomListAdapter customListAdapter = new CustomListAdapter( (Activity) context, nameArray, infoArray, imageArray );
             listView = (ListView) myView.findViewById( R.id.listView );
             listView.setAdapter( customListAdapter );
+            generateImages();
         }
 
     };
 
-    public static void generateImages(){
-        warning = cv.getBatteryWarning();
-        critical = cv.getBatteryCritical();
+    public void generateImages(){
+        //System.out.println("from battery " + cv.toString());
 
+        warning = 60;
+        critical = 30;
+        for(int i = 0; i < imageArray.length; i++){
+            if(b[i] <= critical){
+                imageArray[i] = R.drawable.critical;
+            }else if(b[i] <=warning){
+                imageArray[i] = R.drawable.warning;
+            }else{
+                imageArray[i] = R.drawable.good;
+            }
 
+        }
 
     }
 

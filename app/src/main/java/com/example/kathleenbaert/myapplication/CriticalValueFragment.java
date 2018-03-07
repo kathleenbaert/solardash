@@ -1,6 +1,5 @@
 package com.example.kathleenbaert.myapplication;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,13 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * Created by kathleenbaert on 11/1/17.
@@ -26,8 +23,7 @@ public class CriticalValueFragment extends Fragment {
     View myView;
     EditText editText;
     Context context;
-    CriticalValues cv = new CriticalValues();
-
+    static CriticalValues cv = new CriticalValues();
     private DrawerLayout drawerLayout;
 
     @Nullable
@@ -40,7 +36,6 @@ public class CriticalValueFragment extends Fragment {
         return myView;
 
     }
-
     private void textViews() {
         Button saveButton = (Button) myView.findViewById( R.id.save_button );
         saveButton.setOnClickListener( get_edit_view_button_listener );
@@ -89,7 +84,6 @@ public class CriticalValueFragment extends Fragment {
         editText.setText( value );
     }
 
-
     private Button.OnClickListener get_edit_view_button_listener = new Button.OnClickListener() {
         public void onClick(View v) {
             editText = myView.findViewById( R.id.speed_warning );
@@ -126,7 +120,7 @@ public class CriticalValueFragment extends Fragment {
 
             //works!
             //System.out.println(cv.toString());
-
+            System.out.println("from critical values " + cv.toString());
             Snackbar snackbar = Snackbar.make( myView, "Saved numbers", Snackbar.LENGTH_SHORT );
             snackbar.show();
         }

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class JSONData {
     public static JSONData dataInstance = new JSONData();
     static String TAG = "JSONData";
-
     public static double tempF;
     public static double tempC;
     public static double voltage;
