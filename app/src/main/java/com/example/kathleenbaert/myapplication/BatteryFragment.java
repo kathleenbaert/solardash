@@ -31,6 +31,8 @@ public class BatteryFragment extends Fragment {
     Handler mHandler;
     String[] nameArray;
     static CriticalValues cv = new CriticalValues();
+    public SnackbarBuilder sb = new SnackbarBuilder();
+    public AlertBuilder ab = new AlertBuilder();
     int [] b = new int [6];
     Random random = new Random();
     static int warning;
@@ -52,11 +54,11 @@ public class BatteryFragment extends Fragment {
 
 
 
-            super.onCreate(savedInstanceState);
-                this.mHandler = new Handler();
-                m_Runnable.run();
+        super.onCreate(savedInstanceState);
+        this.mHandler = new Handler();
+        m_Runnable.run();
 
-        }
+    }
 
     public final Runnable m_Runnable = new Runnable()
     {
@@ -101,10 +103,11 @@ public class BatteryFragment extends Fragment {
         for(int i = 0; i < imageArray.length; i++){
             if(b[i] <= critical){
                 imageArray[i] = R.drawable.critical;
-                Snackbar snackbar = Snackbar.make( myView, "CRITICAL ALERT ON BATTERY: " + nameArray[i], Snackbar.LENGTH_SHORT );
-                snackbar.show();
+                ab.alertBuilder( "CRITICAL BATTERY WARNING", "Critical Alert on Battery: " + nameArray[i], myView.getContext() );
             }else if(b[i] <=warning){
                 imageArray[i] = R.drawable.warning;
+                sb.snackbarBuilder( myView, "Warning Alert on Battery: " +nameArray[i] );
+
             }else{
                 imageArray[i] = R.drawable.good;
             }

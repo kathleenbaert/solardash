@@ -1,9 +1,7 @@
 package com.example.kathleenbaert.myapplication;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
