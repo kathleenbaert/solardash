@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +29,13 @@ public class BatteryFragment extends Fragment {
 
     View myView;
     Handler mHandler;
+    String[] nameArray;
     static CriticalValues cv = new CriticalValues();
     int [] b = new int [6];
     Random random = new Random();
     static int warning;
     static int critical;
+
     Integer[] imageArray = new Integer[6];
     @Nullable
     @Override
@@ -65,7 +69,7 @@ public class BatteryFragment extends Fragment {
 
             }
             BatteryFragment.this.mHandler.postDelayed(m_Runnable,1000);
-            String[] nameArray = {"Rear Right", "Rear Middle", "Rear Left", "Front Right", "Front Middle", "Front Left"};
+            nameArray = new String[]{"Rear Right", "Rear Middle", "Rear Left", "Front Right", "Front Middle", "Front Left"};
 
             String[] infoArray = {
                     "Current Battery percentage: " + b[0],
@@ -97,6 +101,8 @@ public class BatteryFragment extends Fragment {
         for(int i = 0; i < imageArray.length; i++){
             if(b[i] <= critical){
                 imageArray[i] = R.drawable.critical;
+                Snackbar snackbar = Snackbar.make( myView, "CRITICAL ALERT ON BATTERY: " + nameArray[i], Snackbar.LENGTH_SHORT );
+                snackbar.show();
             }else if(b[i] <=warning){
                 imageArray[i] = R.drawable.warning;
             }else{

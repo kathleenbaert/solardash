@@ -8,6 +8,14 @@
     android:layout_height="wrap_content"
  >
 
+    <Button
+        android:id="@+id/informationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Information"
+        android:layout_marginTop="60dp"
+        />
+
     <TextView
         android:id="@+id/heading"
         android:layout_width="match_parent"
@@ -15,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:text="Set Desired Critical Values"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -88,7 +96,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="left"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
 
@@ -97,7 +107,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="right"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
             </LinearLayout>
@@ -121,7 +133,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="left"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
 
@@ -130,7 +144,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="right"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
             </LinearLayout>
@@ -155,7 +171,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="left"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
 
@@ -164,7 +182,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="right"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
             </LinearLayout>
@@ -189,7 +209,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="left"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
 
@@ -198,7 +220,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_gravity="right"
+                    android:ellipsize="start"
+                    android:maxLines="1"
+                    android:gravity="center"
                     android:layout_weight="0.5"
                     />
             </LinearLayout>

@@ -25,6 +25,7 @@ public class CriticalValueFragment extends Fragment {
     View myView;
     EditText editText;
     public Context context;
+    public AlertBuilder ab = new AlertBuilder();
     static CriticalValues cv = new CriticalValues();
     private DrawerLayout drawerLayout;
     public boolean saveTheseValues;
@@ -43,7 +44,8 @@ public class CriticalValueFragment extends Fragment {
     private void textViews() {
         Button saveButton = (Button) myView.findViewById( R.id.save_button );
         saveButton.setOnClickListener( get_edit_view_button_listener );
-
+        Button informationButton = (Button) myView.findViewById( R.id.informationButton );
+        informationButton.setOnClickListener( informationButtonListener );
     }
 
     private void savePreferences(String key, int value) {
@@ -88,6 +90,14 @@ public class CriticalValueFragment extends Fragment {
         editText.setText( value + "" );
     }
 
+    private Button.OnClickListener informationButtonListener = new Button.OnClickListener() {
+        public void onClick(View v) {
+            ab.alertBuilder( "Information", "Use this screen to set the values at which the app will warn you that the vehicle has reached critical values. \n\n" +
+                    "The  values under the yellow triangle alert are a warning value where the health indicator on the sensor will turn to the yellow triangle alert and generate a 2 second snackbar alert. \n\n" +
+                    "The values under the red stop sign is a critcal alert value where the health indicator on the sensor will turn to the red stop sign, and a popup alert.\n\n" +
+                    "Please only enter non-negative, whole numbers.", context );
+        }
+    };
     private Button.OnClickListener get_edit_view_button_listener = new Button.OnClickListener() {
         public void onClick(View v) {
             saveTheseValues = true;
@@ -119,7 +129,7 @@ public class CriticalValueFragment extends Fragment {
                 voltageCritical = Integer.parseInt( editText.getText().toString() );
 
             } catch (NumberFormatException e) {
-                alertBuilder( "Number Format Exception", "Please ensure you entered all 8 values, and there are no negatives or decimal numbers." );
+                ab.alertBuilder( "Number Format Exception", "Please ensure you entered all 8 values, and there are no negatives or decimal numbers.", context );
                 saveTheseValues = false;
             }
 
@@ -134,7 +144,7 @@ public class CriticalValueFragment extends Fragment {
                 cv.setVoltageWarning( voltageWarning );
                 cv.setVoltageCritical( voltageCritical );
             } catch (Exception e) {
-                alertBuilder( "Problem occurred", "Problem has occurred while setting the critical values. Error: " + e.toString() );
+                ab.alertBuilder( "Problem occurred", "Problem has occurred while setting the critical values. Error: " + e.toString(), context );
                 saveTheseValues = false;
             }
             //savePreferences
@@ -155,32 +165,32 @@ public class CriticalValueFragment extends Fragment {
 
                 savePreferences( "voltageCritical", voltageCritical );
             } catch (Exception e) {
-                alertBuilder( "Problem occurred", "Problem has occurred while saving your preferences in SharedPreferences. Error " + e.toString() );
+                ab.alertBuilder( "Problem occurred", "Problem has occurred while saving your preferences in SharedPreferences. Error " + e.toString(), context );
                 saveTheseValues = false;
             }
             //data validation
             if (speedWarning > speedCritical || speedWarning == speedCritical) {
-                alertBuilder( "Fix Speed Values", "Ensure Speed Critical Value is greater than Speed Warning Value, and they are not the same value." );
+                ab.alertBuilder( "Fix Speed Values", "Ensure Speed Critical Value is greater than Speed Warning Value, and they are not the same value.", context );
                 saveTheseValues = false;
             }
             if (tempWarning > tempCritical || tempWarning == tempCritical) {
-                alertBuilder( "Fix Temperature Values", "Ensure Temperature Critical Value is greater than Temperature Warning Value, and they are not the same value." );
+                ab.alertBuilder( "Fix Temperature Values", "Ensure Temperature Critical Value is greater than Temperature Warning Value, and they are not the same value.", context );
                 saveTheseValues = false;
             }
             if (batteryWarning < batteryCritical || batteryCritical == batteryWarning) {
-                alertBuilder( "Fix Battery Values", "Ensure Battery Warning Value is greater than Battery Critical Value, and they are not the same value." );
+                ab.alertBuilder( "Fix Battery Values", "Ensure Battery Warning Value is greater than Battery Critical Value, and they are not the same value.", context );
                 saveTheseValues = false;
             }
             if (voltageWarning > voltageCritical || voltageWarning == voltageCritical) {
-                alertBuilder( "Fix Voltage Values", "Ensure Voltage Critical Value is greater than Voltage Warning Value, and they are not the same value." );
+                ab.alertBuilder( "Fix Voltage Values", "Ensure Voltage Critical Value is greater than Voltage Warning Value, and they are not the same value.", context );
                 saveTheseValues = false;
             }
             if (batteryCritical > 100 || batteryWarning > 100) {
-                alertBuilder( "Fix Battery Values", "Ensure Battery Values are less than 100. Remember, this is a percentage." );
+                ab.alertBuilder( "Fix Battery Values", "Ensure Battery Values are less than 100. Remember, this is a percentage.", context );
                 saveTheseValues = false;
             }
-            if(speedWarning == 0 || speedCritical == 0 || tempWarning == 0 || tempCritical == 0 || batteryWarning == 0 || batteryCritical == 0 || voltageWarning == 0 || voltageCritical == 0){
-                alertBuilder("Zero Value", "Ensure none of the values are 0.");
+            if (speedWarning == 0 || speedCritical == 0 || tempWarning == 0 || tempCritical == 0 || batteryWarning == 0 || batteryCritical == 0 || voltageWarning == 0 || voltageCritical == 0) {
+                ab.alertBuilder( "Zero Value", "Ensure none of the values are 0.", context );
                 saveTheseValues = false;
             }
 
@@ -190,18 +200,6 @@ public class CriticalValueFragment extends Fragment {
             }
         }
     };
-
-    public void alertBuilder(String title, String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder( context );
-        builder.setMessage( message ).setTitle( title );
-        builder.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        } );
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
 
 
 }
