@@ -34,12 +34,12 @@ public class CriticalValueFragment extends Fragment {
         myView = inflater.inflate( R.layout.critical_values_dash, container, false );
         context = myView.getContext();
         loadSavedPreferences();
-        textViews();
+        setUpButtons();
         return myView;
 
     }
 
-    private void textViews() {
+    private void setUpButtons() {
         Button saveButton = (Button) myView.findViewById( R.id.save_button );
         saveButton.setOnClickListener( get_edit_view_button_listener );
         Button informationButton = (Button) myView.findViewById( R.id.informationButton );

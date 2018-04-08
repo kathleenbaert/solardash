@@ -43,11 +43,28 @@ public class BatteryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.battery_dash, container, false);
+
+
+        Button button = (Button) myView.findViewById( R.id.button );
+        button.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent( getActivity(), GraphLayout.class );
+                startActivity( intent );
+
+
+            }
+        } );
         for(int i = 0; i < b.length; i++){
             b[i] = 100;
         }
         return myView;
     }
+
+    public void graph(View view){
+
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated( savedInstanceState );
