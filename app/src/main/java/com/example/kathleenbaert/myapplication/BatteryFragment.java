@@ -1,3 +1,4 @@
+
 package com.example.kathleenbaert.myapplication;
 
 import android.app.Activity;
@@ -84,7 +85,7 @@ public class BatteryFragment extends Fragment {
         {
 
             for(int i = 0; i < b.length; i++){
-                b[i]-=random.nextInt( 10 );
+                b[i]-=random.nextInt( 4 );
 
             }
             BatteryFragment.this.mHandler.postDelayed(m_Runnable,1000);
@@ -120,10 +121,10 @@ public class BatteryFragment extends Fragment {
         for(int i = 0; i < imageArray.length; i++){
             if(b[i] <= critical){
                 imageArray[i] = R.drawable.critical;
-                ab.alertBuilder( "CRITICAL BATTERY WARNING", "Critical Alert on Battery: " + nameArray[i], myView.getContext() );
+                //ab.alertBuilder( "CRITICAL BATTERY WARNING", "Critical Alert on Battery: " + nameArray[i], myView.getContext() );
             }else if(b[i] <=warning){
                 imageArray[i] = R.drawable.warning;
-                sb.snackbarBuilder( myView, "Warning Alert on Battery: " +nameArray[i] );
+                //sb.snackbarBuilder( myView, "Warning Alert on Battery: " +nameArray[i] );
 
             }else{
                 imageArray[i] = R.drawable.good;

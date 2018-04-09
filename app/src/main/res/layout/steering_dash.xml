@@ -11,11 +11,51 @@
         android:layout_marginTop="60dp"
         android:text="Steering Dashboard" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <Button
+        android:id="@+id/up_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:text="Placeholder of Where to Display Steering Controls"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:text="UP"/>
+
+    <Button
+        android:id="@+id/left_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/up_button"
+        android:layout_marginTop="14dp"
+        android:layout_toLeftOf="@+id/up_button"
+        android:layout_toStartOf="@+id/up_button"
+        android:text="LEFT"/>
+
+    <Button
+        android:id="@+id/right_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/left_button"
+        android:layout_toEndOf="@+id/up_button"
+        android:layout_toRightOf="@+id/up_button"
+        android:text="RIGHT"/>
+
+    <Button
+        android:id="@+id/reverse_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REVERSE"
+        android:layout_below="@+id/right_button"
+        android:layout_toRightOf="@+id/left_button"
+        android:layout_toEndOf="@+id/left_button"/>
+
+    <Button
+        android:id="@+id/stop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/reverse_button"
+        android:layout_alignStart="@+id/reverse_button"
+        android:layout_below="@+id/reverse_button"
+        android:layout_marginTop="50dp"
+        android:text="STOP"/>
+
+
 </RelativeLayout>

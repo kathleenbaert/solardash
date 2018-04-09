@@ -11,6 +11,10 @@
             android:icon="@drawable/ic_critical_value"
             android:title="Set Critical Values"/>
         <item
+            android:id="@+id/nav_steering_dash"
+            android:icon="@drawable/ic_steering"
+            android:title="Steering Dash" />
+        <item
             android:id="@+id/nav_speedometer_dash"
             android:icon="@drawable/ic_speedometer"
             android:title="Speedometer Dash" />
@@ -19,21 +23,17 @@
             android:icon="@drawable/ic_temperature"
             android:title="Temperature Dash" />
         <item
-            android:id="@+id/nav_steering_dash"
-            android:icon="@drawable/ic_steering"
-            android:title="Steering Dash" />
-        <item
             android:id="@+id/nav_battery_dash"
             android:icon="@drawable/ic_battery"
             android:title="Battery Dash" />
         <item
             android:id="@+id/nav_voltage"
             android:icon="@drawable/ic_voltage"
-            android:title="Voltage" />
+            android:title="Voltage Dash" />
         <item
             android:id="@+id/nav_postracesummary_dash"
             android:icon="@drawable/ic_postracesummary"
-            android:title="Post-Race Summary" />
+            android:title="Post-Race Graphs" />
     </group>
 
 </menu>

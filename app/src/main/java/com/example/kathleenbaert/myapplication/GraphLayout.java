@@ -7,6 +7,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.Random;
+
 /**
  * Created by kathleenbaert on 4/8/18.
  */
@@ -19,15 +21,25 @@ public class GraphLayout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.graph_layout );
-        double x, y;
 
-        x = -5;
+
+        double x, y;
+        x = 0;
+        Random random = new Random();
+        int [] values = new int [50];
+        values[0] = 100;
+        for(int i = 1; i < values.length; i++){
+            //works for test data
+            values[i] = values[i - 1] - random.nextInt(2);
+
+         }
+
         GraphView graph = (GraphView) findViewById( R.id.graph );
         series = new LineGraphSeries<DataPoint>();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < values.length; i++) {
             x += .1;
-            y = Math.sin( x );
-            series.appendData( new DataPoint( x, y ), true, 500);
+            y=values[i];
+            series.appendData( new DataPoint( x, y ), true, values.length);
 
         }
         graph.addSeries( series );

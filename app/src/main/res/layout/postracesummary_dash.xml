@@ -15,6 +15,12 @@
         android:layout_gravity="center"
         android:text="Post-Race Summary Dashboard" />
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Placeholder for all the graphs that will be generated throughout the race"/>
+
     <Button
         android:id="@+id/cButton"
         android:layout_width="wrap_content"
