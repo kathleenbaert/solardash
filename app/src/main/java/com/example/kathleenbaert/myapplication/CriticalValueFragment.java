@@ -24,7 +24,12 @@ public class CriticalValueFragment extends Fragment {
     EditText editText;
     public Context context;
     public AlertBuilder ab = new AlertBuilder();
-    static CriticalValues cv = new CriticalValues();
+
+
+    public CriticalValues cv = CriticalValues.cv;
+
+
+
     private DrawerLayout drawerLayout;
     public boolean saveTheseValues;
 

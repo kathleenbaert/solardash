@@ -20,13 +20,13 @@ public class CustomListAdapter extends ArrayAdapter {
     //to reference the Activity
     private final Activity context;
 
-    //to store the animal images
+    //to store the images
     private final Integer[] imageIDarray;
 
-    //to store the list of countries
+    //to store the list of names
     private final String[] nameArray;
 
-    //to store the list of countries
+    //to store the list of info
     private final String[] infoArray;
     private final BatteryFragment bf = new BatteryFragment();
 

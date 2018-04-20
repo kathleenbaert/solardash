@@ -5,6 +5,7 @@ package com.example.kathleenbaert.myapplication;
  */
 
 public class CriticalValues {
+    public static CriticalValues cv = new CriticalValues();
 
     int speedWarning, speedCritical;
     int tempWarning, tempCritical;

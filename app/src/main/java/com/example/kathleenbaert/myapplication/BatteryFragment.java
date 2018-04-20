@@ -34,12 +34,12 @@ public class BatteryFragment extends Fragment {
     static CriticalValues cv = new CriticalValues();
     public SnackbarBuilder sb = new SnackbarBuilder();
     public AlertBuilder ab = new AlertBuilder();
-    int [] b = new int [6];
+    int [] b = new int [4];
     Random random = new Random();
     static int warning;
     static int critical;
 
-    Integer[] imageArray = new Integer[6];
+    Integer[] imageArray = new Integer[4];
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -52,8 +52,6 @@ public class BatteryFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent( getActivity(), GraphLayout.class );
                 startActivity( intent );
-
-
             }
         } );
         for(int i = 0; i < b.length; i++){
@@ -62,16 +60,9 @@ public class BatteryFragment extends Fragment {
         return myView;
     }
 
-    public void graph(View view){
-
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated( savedInstanceState );
-
-
-
         super.onCreate(savedInstanceState);
         this.mHandler = new Handler();
         m_Runnable.run();
@@ -83,21 +74,18 @@ public class BatteryFragment extends Fragment {
         public void run()
 
         {
-
             for(int i = 0; i < b.length; i++){
                 b[i]-=random.nextInt( 4 );
 
             }
             BatteryFragment.this.mHandler.postDelayed(m_Runnable,1000);
-            nameArray = new String[]{"Rear Right", "Rear Middle", "Rear Left", "Front Right", "Front Middle", "Front Left"};
+            nameArray = new String[]{"Rear Right", "Rear Left", "Front Right", "Front Left"};
 
             String[] infoArray = {
                     "Current Battery percentage: " + b[0],
                     "Current Battery percentage: " + b[1],
                     "Current Battery percentage: " + b[2],
-                    "Current Battery percentage: " + b[3],
-                    "Current Battery percentage: " + b[4],
-                    "Current Battery percentage: " + b[5]
+                    "Current Battery percentage: " + b[3]
             };
 
 
@@ -116,8 +104,8 @@ public class BatteryFragment extends Fragment {
     public void generateImages(){
         //System.out.println("from battery " + cv.toString());
 
-        warning = 60;
-        critical = 30;
+        warning = CriticalValues.cv.getBatteryWarning();
+        critical = CriticalValues.cv.getBatteryCritical();
         for(int i = 0; i < imageArray.length; i++){
             if(b[i] <= critical){
                 imageArray[i] = R.drawable.critical;

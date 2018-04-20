@@ -5,9 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,10 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+
 import java.util.Set;
 import java.util.UUID;
-import com.example.kathleenbaert.myapplication.ConnectThread;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -127,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_battery_dash) {
             fragmentManager.beginTransaction().replace( R.id.content_frame, new BatteryFragment() ).commit();
         } else if (id == R.id.nav_postracesummary_dash) {
-            fragmentManager.beginTransaction().replace( R.id.content_frame, new PostRaceSummaryFragment() ).commit();
+            fragmentManager.beginTransaction().replace( R.id.content_frame, new RaceGraphsFragment() ).commit();
         } else if (id == R.id.nav_bluetooth) {
             fragmentManager.beginTransaction().replace( R.id.content_frame, new BlueToothFragment() ).commit();
         } else if (id == R.id.nav_voltage) {
