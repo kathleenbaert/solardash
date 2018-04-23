@@ -41,9 +41,5 @@ public class RaceGraphsFragment extends Fragment {
         listView = (ListView) myView.findViewById( R.id.listView );
         listView.setAdapter( graphListAdapter );
 
-
     }
-
-
-        }
-
+}

@@ -31,7 +31,7 @@ public class BatteryFragment extends Fragment {
     View myView;
     Handler mHandler;
     String[] nameArray;
-    static CriticalValues cv = new CriticalValues();
+
     public SnackbarBuilder sb = new SnackbarBuilder();
     public AlertBuilder ab = new AlertBuilder();
     int [] b = new int [4];

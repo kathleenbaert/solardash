@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener( this );
         bluetoothThread bt = new bluetoothThread();
         bt.start();
+        createTestData();
     }
 
     public class bluetoothThread extends Thread{
@@ -134,5 +135,13 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer( GravityCompat.START );
         return true;
     }
+
+
+    public static void createTestData(){
+JSONData jsonData = new JSONData();
+jsonData.setAmps( 4 );
+
+    }
+
 }
 
