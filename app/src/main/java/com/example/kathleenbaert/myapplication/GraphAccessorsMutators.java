@@ -12,11 +12,18 @@ public class GraphAccessorsMutators {
     public static ArrayList<ArrayList<Double>> arrayLists;
     public static GraphAccessorsMutators graphAccessorsMutators = new GraphAccessorsMutators();
     public static int numOfSensors;
+    public static ArrayList<String> nameArrayList;
     public static String getxLabel() {
         return xLabel;
     }
     public static void setxLabel(String xLabel) {
         GraphAccessorsMutators.xLabel = xLabel;
+    }
+    public static ArrayList<String> getNameArrayList(){
+        return nameArrayList;
+    }
+    public static void setNameArrayList(ArrayList<String> nameArrayList){
+        GraphAccessorsMutators.nameArrayList = nameArrayList;
     }
     public static String getyLabel() {
         return yLabel;

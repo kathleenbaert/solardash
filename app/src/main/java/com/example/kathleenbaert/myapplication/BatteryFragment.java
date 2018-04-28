@@ -54,6 +54,7 @@ public class BatteryFragment extends Fragment {
                 graphAccessorsMutators.setxLabel( " mins" );
                 graphAccessorsMutators.setyLabel( "%" );
                 graphAccessorsMutators.setNumOfSensors( jsonData.getBatterySize() );
+                graphAccessorsMutators.setNameArrayList( jsonData.getBatteryNameArray() );
                 Intent intent = new Intent( getActivity(), GraphLayout.class );
                 startActivity( intent );
             }
