@@ -2,6 +2,7 @@ package com.example.kathleenbaert.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 
 import com.jjoe64.graphview.DefaultLabelFormatter;
@@ -9,6 +10,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -24,56 +27,38 @@ public class GraphLayout extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.graph_layout );
 
-
+        final GraphAccessorsMutators graphAccessorsMutators = new GraphAccessorsMutators().graphAccessorsMutators;
         double x, y;
-        x = 0;
-        Random random = new Random();
-        int[] values1 = new int[50];
-        values1[0] = 100;
-        for (int i = 1; i < values1.length; i++) {
-            //works for test data
-            values1[i] = values1[i - 1] - random.nextInt( 2 );
-
-        }
-
+        int counter;
         GraphView graph = (GraphView) findViewById( R.id.graph );
-        series = new LineGraphSeries<DataPoint>();
-        series.setColor( Color.GREEN );
-        for (int i = 0; i < values1.length; i++) {
-            x += .1;
-            y = values1[i];
-            series.appendData( new DataPoint( x, y ), true, values1.length );
+        int [] mColors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE};
+        ArrayList<ArrayList<Double>> currData = graphAccessorsMutators.getArrayLists();
 
+
+        for (int i = 0; i < graphAccessorsMutators.getNumOfSensors(); i++) {
+            series = new LineGraphSeries<DataPoint>(  );
+            series.setColor(mColors[i % graphAccessorsMutators.getNumOfSensors()]);
+            x = 0;
+            counter = 0;
+            y = currData.get( i ).get( 0 );
+            for(Double d : currData.get( i )){
+                x += .1;
+                y = d;
+                counter++;
+                series.appendData( new DataPoint( x, y ), true,  counter);
+            }
+            graph.addSeries( series );
         }
-        graph.addSeries( series );
-        x = 0;
-
-        int[] values = new int[50];
-        values[0] = 100;
-        for (int i = 1; i < values.length; i++) {
-            //works for test data
-            values[i] = values[i - 1] - random.nextInt( 2 );
-
-        }
-        series = new LineGraphSeries<DataPoint>();
-        series.setColor( Color.BLUE );
-        for (int i = 0; i < values.length; i++) {
-            x += .1;
-            y = values[i];
-            series.appendData( new DataPoint( x, y ), true, values.length );
-
-        }
-        graph.addSeries( series );
 
         graph.getGridLabelRenderer().setLabelFormatter( new DefaultLabelFormatter() {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
                     // show normal x values
-                    return super.formatLabel( value, isValueX ) + " mins";
+                    return super.formatLabel( value, isValueX ) + graphAccessorsMutators.getxLabel();
                 } else {
                     // show currency for y values
-                    return super.formatLabel( value, isValueX ) + "%";
+                    return super.formatLabel( value, isValueX ) + graphAccessorsMutators.getyLabel();
                 }
             }
 

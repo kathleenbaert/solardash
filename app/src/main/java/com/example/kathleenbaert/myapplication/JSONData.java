@@ -95,9 +95,9 @@ public class JSONData {
         batterySize = size;
         for(int i = 0; i < size; i++){
             batteryNameArray.add( " " );
-            currBattery.add( 0.0 );
+            currBattery.add( 100.0 );
             ArrayList<Double> inner = new ArrayList<Double>( );
-            inner.add( 0.0 );
+            inner.add( 100.0 );
             batteryHistorical.add( inner );
         }
     }

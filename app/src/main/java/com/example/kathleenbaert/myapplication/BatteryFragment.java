@@ -48,15 +48,14 @@ public class BatteryFragment extends Fragment {
         button.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GraphAccessorsMutators graphAccessorsMutators = GraphAccessorsMutators.graphAccessorsMutators;
+                graphAccessorsMutators.setName( "Battery Readings" );
+                graphAccessorsMutators.setArrayLists( jsonData.getBatteryHistorical() );
+                graphAccessorsMutators.setxLabel( " mins" );
+                graphAccessorsMutators.setyLabel( "%" );
+                graphAccessorsMutators.setNumOfSensors( jsonData.getBatterySize() );
                 Intent intent = new Intent( getActivity(), GraphLayout.class );
-                //String s = " ";
                 startActivity( intent );
-//                for(ArrayList<Double> d : jsonData.getBatteryHistorical()){
-//                    for(Double val : d){
-//                        s += (val + "\n");
-//                    }
-//                }
-//                ab.alertBuilder( "TEST",  s, myView.getContext());
             }
         } );
 
