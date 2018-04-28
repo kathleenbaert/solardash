@@ -48,19 +48,12 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView nameTextField = (TextView) rowView.findViewById( R.id.textViewName );
         TextView infoTextField = (TextView) rowView.findViewById( R.id.textViewInfo );
         ImageView imageView = (ImageView) rowView.findViewById( R.id.imageView );
-        Button button = (Button) rowView.findViewById( R.id.button_view_graph );
 
         //this code sets the values of the objects to values from the arrays
         nameTextField.setText( nameArray[position] );
         infoTextField.setText( infoArray[position] );
         imageView.setImageResource( imageIDarray[position] );
-        button.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //System.out.println("clicked  " + position);
 
-            }
-        } );
         return rowView;
 
     }

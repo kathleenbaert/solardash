@@ -3,22 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:text="Speedometer Dashboard" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textCurr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:text="Placeholder of Where to Display Current Speed"
+        android:text="Current Speed in MPH:"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textCurr"
+        android:layout_centerHorizontal="true"
+        android:text="0"
+        android:textSize="60sp"/>
 
 
 </RelativeLayout>
