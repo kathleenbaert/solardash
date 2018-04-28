@@ -3,6 +3,7 @@ package com.example.kathleenbaert.myapplication;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,24 +17,14 @@ import android.widget.TextView;
  */
 
 public class CustomListAdapter extends ArrayAdapter {
-
-    //to reference the Activity
     private final Activity context;
-
-    //to store the images
     private final Integer[] imageIDarray;
-
-    //to store the list of names
     private final String[] nameArray;
-
-    //to store the list of info
     private final String[] infoArray;
-    private final BatteryFragment bf = new BatteryFragment();
+
 
     public CustomListAdapter(Activity context, String[] nameArrayParam, String[] infoArrayParam, Integer[] imageIDArrayParam) {
-
         super( context, R.layout.listview_row, nameArrayParam );
-
         this.context = context;
         this.imageIDarray = imageIDArrayParam;
         this.nameArray = nameArrayParam;

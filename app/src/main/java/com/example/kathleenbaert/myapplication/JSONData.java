@@ -1,11 +1,5 @@
 package com.example.kathleenbaert.myapplication;
 
-import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -15,25 +9,25 @@ import java.util.ArrayList;
 public class JSONData {
     public static JSONData jsonData = new JSONData();
 
-
+    public static int batterySize;
     static String TAG = "JSONData";
     public static double speedMPH;
-    public static ArrayList<Double> currTemp, currVolt, currAmp, speedHistorical;
-    public static ArrayList<ArrayList<Double>> tempHistorical, voltageHistorical, ampHistorical;
-    public static ArrayList<String> tempNameArray, voltageNameArray, ampNameArray;
+    public static ArrayList<Double> currTemp, currVolt, currBattery, speedHistorical;
+    public static ArrayList<ArrayList<Double>> tempHistorical, voltageHistorical, batteryHistorical;
+    public static ArrayList<String> tempNameArray, voltageNameArray, batteryNameArray;
 
 
     public static void initialize(){
         currTemp = new ArrayList<Double>();
         currVolt = new ArrayList<Double>();
-        currAmp = new ArrayList<Double>();
+        currBattery = new ArrayList<Double>();
         speedHistorical = new ArrayList<Double>();
         tempHistorical = new ArrayList<ArrayList<Double>> ();
         voltageHistorical = new ArrayList<ArrayList<Double>> ();
-        ampHistorical = new ArrayList<ArrayList<Double>> ();
+        batteryHistorical = new ArrayList<ArrayList<Double>> ();
         tempNameArray = new ArrayList<String> ();
         voltageNameArray = new ArrayList<String>();
-        ampNameArray = new ArrayList<String>( );
+        batteryNameArray = new ArrayList<String>( );
     }
 
     public static void setSpeed(double speed) {
@@ -97,28 +91,46 @@ public class JSONData {
         return voltageNameArray;
     }
 
-    public static void setCurrAmp(double [] amps) {
-        for (int i = 0; i < amps.length; i++) {
-            currAmp.add( amps[i] );
-            ampHistorical.get( i ).add( amps[i] );
+    public static void setBatterySize(int size){
+        batterySize = size;
+        for(int i = 0; i < size; i++){
+            batteryNameArray.add( " " );
+            currBattery.add( 0.0 );
+            ArrayList<Double> inner = new ArrayList<Double>( );
+            inner.add( 0.0 );
+            batteryHistorical.add( inner );
+        }
+    }
+    public static int getBatterySize(){
+        return batterySize;
+    }
+
+    public static void setCurrBattery(Double [] battery) {
+        for (int i = 0; i < battery.length; i++) {
+            currBattery.set( i, battery[i] );
+            //currBattery.add( battery[i] );
+            batteryHistorical.get( i ).add( battery[i] );
         }
     }
 
-    public static ArrayList<Double> getCurrAmps() {
-        return currAmp;
+
+
+
+    public static ArrayList<Double> getCurrBattery() {
+        return currBattery;
     }
 
-    public static ArrayList<ArrayList<Double>> getAmpHistorical() {
-        return ampHistorical;
+    public static ArrayList<ArrayList<Double>> getBatteryHistorical() {
+        return batteryHistorical;
     }
 
-    public static void setAmpNameArray(String[] names){
+    public static void setBatteryNameArray(String[] names){
         for (int i = 0; i < names.length; i++) {
-            ampNameArray.add( names[i] );
+            batteryNameArray.add( names[i] );
         }
     }
-    public static ArrayList<String> getAmpNameArray() {
-        return ampNameArray;
+    public static ArrayList<String> getBatteryNameArray() {
+        return batteryNameArray;
     }
 }
 

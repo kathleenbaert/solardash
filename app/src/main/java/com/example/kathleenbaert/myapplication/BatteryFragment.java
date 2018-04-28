@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -30,16 +31,13 @@ public class BatteryFragment extends Fragment {
 
     View myView;
     Handler mHandler;
-    String[] nameArray;
-
+    public static JSONData jsonData = JSONData.jsonData;
     public SnackbarBuilder sb = new SnackbarBuilder();
     public AlertBuilder ab = new AlertBuilder();
-    int [] b = new int [4];
     Random random = new Random();
     static int warning;
     static int critical;
 
-    Integer[] imageArray = new Integer[4];
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -51,12 +49,17 @@ public class BatteryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent( getActivity(), GraphLayout.class );
+                //String s = " ";
                 startActivity( intent );
+//                for(ArrayList<Double> d : jsonData.getBatteryHistorical()){
+//                    for(Double val : d){
+//                        s += (val + "\n");
+//                    }
+//                }
+//                ab.alertBuilder( "TEST",  s, myView.getContext());
             }
         } );
-        for(int i = 0; i < b.length; i++){
-            b[i] = 100;
-        }
+
         return myView;
     }
 
@@ -74,43 +77,36 @@ public class BatteryFragment extends Fragment {
         public void run()
 
         {
-            for(int i = 0; i < b.length; i++){
-                b[i]-=random.nextInt( 4 );
-
-            }
             BatteryFragment.this.mHandler.postDelayed(m_Runnable,1000);
-            nameArray = new String[]{"Rear Right", "Rear Left", "Front Right", "Front Left"};
-
-            String[] infoArray = {
-                    "Current Battery percentage: " + b[0],
-                    "Current Battery percentage: " + b[1],
-                    "Current Battery percentage: " + b[2],
-                    "Current Battery percentage: " + b[3]
-            };
-
-
-
+            String [] nameArray = new String[jsonData.getBatterySize()];
+            for(int i = 0; i < jsonData.getBatterySize(); i++){
+                nameArray[i] = jsonData.getBatteryNameArray().get( i );
+            }
+            //set up the infoArray from current data
+            String [] infoArray = new String[jsonData.getBatterySize()];
+            for(int i = 0; i < jsonData.getBatterySize(); i++){
+                infoArray[i] = ("Current Battery Reading: " + jsonData.getCurrBattery().get( i ).toString() + "%");
+            }
             ListView listView;
+            Integer[] imageArray = generateImages(jsonData.getBatterySize());
 
             Context context = myView.getContext();
             CustomListAdapter customListAdapter = new CustomListAdapter( (Activity) context, nameArray, infoArray, imageArray );
             listView = (ListView) myView.findViewById( R.id.listView );
             listView.setAdapter( customListAdapter );
-            generateImages();
         }
 
     };
 
-    public void generateImages(){
-        //System.out.println("from battery " + cv.toString());
-
+    public Integer [] generateImages(int n){
+        Integer [] imageArray = new Integer[n];
         warning = CriticalValues.cv.getBatteryWarning();
         critical = CriticalValues.cv.getBatteryCritical();
-        for(int i = 0; i < imageArray.length; i++){
-            if(b[i] <= critical){
+        for(int i = 0; i < n; i++){
+            if(jsonData.currBattery.get( i ) <= critical){
                 imageArray[i] = R.drawable.critical;
                 //ab.alertBuilder( "CRITICAL BATTERY WARNING", "Critical Alert on Battery: " + nameArray[i], myView.getContext() );
-            }else if(b[i] <=warning){
+            }else if(jsonData.currBattery.get( i ) <= warning){
                 imageArray[i] = R.drawable.warning;
                 //sb.snackbarBuilder( myView, "Warning Alert on Battery: " +nameArray[i] );
 
@@ -119,6 +115,7 @@ public class BatteryFragment extends Fragment {
             }
 
         }
+        return imageArray;
 
     }
 

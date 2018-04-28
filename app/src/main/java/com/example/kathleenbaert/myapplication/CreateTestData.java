@@ -15,6 +15,9 @@ public class CreateTestData {
 
     public void start(){
         jsonData.initialize();
+        String [] batteryNames = {"Rear Right", "Rear Left", "Front Right", "Front Left"};
+        jsonData.setBatteryNameArray( batteryNames );
+
         this.mHandler = new Handler();
         m_Runnable.run();
 
@@ -23,10 +26,9 @@ public class CreateTestData {
     public final Runnable m_Runnable = new Runnable()
     {
         public void run(){
-            createSpeedData();
-
-
             CreateTestData.this.mHandler.postDelayed(m_Runnable,1000);
+            createSpeedData();
+            createBatteryData();
 
         }
     };
@@ -50,7 +52,19 @@ public class CreateTestData {
 
     }
     public static void createBatteryData(){
-
+        //creates 4 battery readings
+        Double [] builtReadings = new Double [4];
+        jsonData.setBatterySize( 4 );
+        for(int i = 0; i < 4; i++){
+            if(jsonData.getCurrBattery().get( i ) <= 0.0){
+                builtReadings[i] = 100.0;
+            }
+            else{
+                builtReadings[i] = jsonData.getCurrBattery().get( i ) - random.nextDouble();
+            }
+        }
+        jsonData.setCurrBattery( builtReadings );
+        //create 4 names:
 
     }
     public static void createVoltageData(){
