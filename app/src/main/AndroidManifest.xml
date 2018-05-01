@@ -29,6 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GraphLayout"></activity>
+        <activity android:name=".SpeedGraph"></activity>
 
     </application>
 

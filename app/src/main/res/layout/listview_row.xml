@@ -23,12 +23,14 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textSize="20sp"
+                android:layout_marginLeft="15dp"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/textViewInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:text="TextView"/>
         </LinearLayout>
 
@@ -36,6 +38,7 @@
             android:id="@+id/imageView"
             android:layout_width="52dp"
             android:layout_height="66dp"
+            android:layout_marginRight="15dp"
             app:srcCompat="@drawable/good"/>
 
     </LinearLayout>

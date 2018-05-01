@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,47 +16,113 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 /**
  * Created by kathleenbaert on 11/1/17.
  */
 
 public class VoltageFragment extends Fragment {
 
+
     View myView;
+    Handler mHandler;
+    public static JSONData jsonData = JSONData.jsonData;
+    public AlertBuilder ab = new AlertBuilder();
+    Random random = new Random();
+    static int warning, critical;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.voltage_dash, container, false);
+
+
+        Button button = (Button) myView.findViewById( R.id.button );
+        button.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GraphAccessorsMutators graphAccessorsMutators = GraphAccessorsMutators.graphAccessorsMutators;
+                graphAccessorsMutators.setName( "Voltage Readings" );
+                graphAccessorsMutators.setArrayLists( jsonData.getVoltageHistorical() );
+                graphAccessorsMutators.setxLabel( " mins" );
+                graphAccessorsMutators.setyLabel( " Ω" );
+                graphAccessorsMutators.setNumOfSensors( jsonData.getVoltageSize() );
+                graphAccessorsMutators.setNameArrayList( jsonData.getVoltageNameArray() );
+                Intent intent = new Intent( getActivity(), GraphLayout.class );
+                startActivity( intent );
+            }
+        } );
+
         return myView;
     }
+
+
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated( savedInstanceState );
+        super.onCreate(savedInstanceState);
+        this.mHandler = new Handler();
+        m_Runnable.run();
 
-        String[] nameArray = {"VTest1", "VTest2", "VTest3", "VTest4", "VTest5", "VTest6"};
 
-        String[] infoArray = {
-                "Vtest sentence 1",
-                "Vtest sentence 2",
-                "Vtest sentence 3",
-                "Vtest sentence 4",
-                "Vtest sentence 5",
-                "Vtest sentence 6."
-        };
 
-        Integer[] imageArray = {R.drawable.good,
-                R.drawable.good,
-                R.drawable.good,
-                R.drawable.warning,
-                R.drawable.good,
-                R.drawable.critical};
 
-        ListView listView;
 
-        Context context = myView.getContext();
-        CustomListAdapter customListAdapter = new CustomListAdapter( (Activity) context, nameArray, infoArray, imageArray );
-        listView = (ListView) myView.findViewById( R.id.listView );
-        listView.setAdapter( customListAdapter );
+
+
+    }
+    public final Runnable m_Runnable = new Runnable()
+    {
+        public void run()
+
+        {
+            VoltageFragment.this.mHandler.postDelayed(m_Runnable,1000);
+            String [] nameArray = new String[jsonData.getVoltageSize()];
+            for(int i = 0; i < jsonData.getVoltageSize(); i++){
+                nameArray[i] = jsonData.getVoltageNameArray().get( i );
+            }
+            //set up the infoArray from current data
+            String [] infoArray = new String[jsonData.getVoltageSize()];
+            for(int i = 0; i < jsonData.getVoltageSize(); i++){
+                infoArray[i] = ("Current Voltage Reading: " + jsonData.getVoltageCurr().get( i ).toString() + " Ω");
+            }
+            ListView listView;
+            Integer[] imageArray = generateImages(jsonData.getVoltageSize());
+            Context context = myView.getContext();
+            CustomListAdapter customListAdapter = new CustomListAdapter( (Activity) context, nameArray, infoArray, imageArray );
+            listView = (ListView) myView.findViewById( R.id.listView );
+            listView.setAdapter( customListAdapter );
+        }
+
+    };
+
+
+    public Integer [] generateImages(int n){
+        Integer [] imageArray = new Integer[n];
+        warning = CriticalValues.cv.getVoltageWarning();
+        critical = CriticalValues.cv.getVoltageCritical();
+        for(int i = 0; i < n; i++){
+            if(jsonData.currVoltage.get( i ) <= critical){
+                imageArray[i] = R.drawable.critical;
+                if(!jsonData.getVoltageCritical( i )){
+                    ab.alertBuilder( "CRITICAL VOLTAGE ISSUE", "Critical Alert on Volt Sensor: " + jsonData.voltageNameArray.get( i ), myView.getContext() );
+                    jsonData.setVoltageCritical( true, i );
+                }
+            }else if(jsonData.currVoltage.get( i ) <= warning){
+                imageArray[i] = R.drawable.warning;
+                if(!jsonData.getVoltageWarning( i )){
+                    ab.alertBuilder( "Voltage Warning", "Warning on Voltage Sensor: " + jsonData.voltageNameArray.get( i ), myView.getContext());
+                    jsonData.setBatteryWarning( true, i );
+                }
+            }else{
+                imageArray[i] = R.drawable.good;
+            }
+
+        }
+        return imageArray;
 
     }
 
